@@ -1,1 +1,1 @@
-# solidified-mash
+# Solid Shortener
