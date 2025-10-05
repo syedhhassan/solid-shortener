@@ -1,7 +1,7 @@
-using SolidShortener.Domain.Users;
-using SolidShortener.Domain.Visits;
+using SolidShortener.Domain.Entities.Users;
+using SolidShortener.Domain.Entities.Visits;
 
-namespace SolidShortener.Domain.Urls;
+namespace SolidShortener.Domain.Entities.Urls;
 
 public class Url : BaseEntity
 {
