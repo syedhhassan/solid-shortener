@@ -1,4 +1,4 @@
-namespace SolidShortener.Domain.Common;
+﻿namespace SolidShortener.Domain.Entities.Common;
 
 public abstract class BaseEntity
 {

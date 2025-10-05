@@ -1,6 +1,6 @@
-using SolidShortener.Domain.Urls;
+using SolidShortener.Domain.Entities.Urls;
 
-namespace SolidShortener.Domain.Visits;
+namespace SolidShortener.Domain.Entities.Visits;
 
 public class Visit
 {
