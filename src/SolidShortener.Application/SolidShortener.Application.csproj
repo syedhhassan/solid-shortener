@@ -5,9 +5,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Urls/Services/" />
-    <Folder Include="Urls/Services/Implementations/" />
-    <Folder Include="Urls/Services/Interfaces/" />
     <Folder Include="Visits/" />
     <Folder Include="Visits/Commands/" />
     <Folder Include="Visits/DTOs/" />
