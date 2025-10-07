@@ -26,9 +26,29 @@ public class Url : BaseEntity
         VisitsCount = 0;
         ExpiresAt = expiresAt;
     }
+    public void SetShortCode(string shortCode) => ShortCode = shortCode;
 
     public void IncrementVisitsCount()
     {
         VisitsCount++;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void MarkAsDeleted()
+    {
+        IsDeleted = true;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void SetExpiresAt(DateTime? expiresAt)
+    {
+        ExpiresAt = expiresAt;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void UnDelete()
+    {
+        IsDeleted = false;
+        UpdatedAt = DateTime.UtcNow;
     }
 }
