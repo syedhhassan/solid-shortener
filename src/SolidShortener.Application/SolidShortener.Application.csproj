@@ -4,14 +4,6 @@
     <ProjectReference Include="..\SolidShortener.Domain\SolidShortener.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Visits/" />
-    <Folder Include="Visits/Commands/" />
-    <Folder Include="Visits/DTOs/" />
-    <Folder Include="Visits/Queries/" />
-    <Folder Include="Visits/Services/" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
