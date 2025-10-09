@@ -1,1 +1,1 @@
-global using SolidShortener.Domain.Entities.Common;
+global using SolidShortener.Domain.Common;
