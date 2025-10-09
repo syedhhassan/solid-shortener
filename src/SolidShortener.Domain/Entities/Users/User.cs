@@ -1,6 +1,6 @@
-using SolidShortener.Domain.Urls;
+using SolidShortener.Domain.Entities.Urls;
 
-namespace SolidShortener.Domain.Users;
+namespace SolidShortener.Domain.Entities.Users;
 
 public class User : BaseEntity
 {
