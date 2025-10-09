@@ -1,6 +1,6 @@
 using SolidShortener.Application.Users.DTOs;
 
-namespace SolidShortener.Application.Mappers;
+namespace SolidShortener.Application.Users;
 
 public static class UserMapper
 {
