@@ -1,7 +1,7 @@
-using SolidShortener.Domain.Entities.Users;
-using SolidShortener.Domain.Entities.Visits;
+using SolidShortener.Domain.Users;
+using SolidShortener.Domain.Visits;
 
-namespace SolidShortener.Domain.Entities.Urls;
+namespace SolidShortener.Domain.Urls;
 
 public class Url : BaseEntity
 {
@@ -26,29 +26,9 @@ public class Url : BaseEntity
         VisitsCount = 0;
         ExpiresAt = expiresAt;
     }
-    public void SetShortCode(string shortCode) => ShortCode = shortCode;
 
     public void IncrementVisitsCount()
     {
         VisitsCount++;
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void MarkAsDeleted()
-    {
-        IsDeleted = true;
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void SetExpiresAt(DateTime? expiresAt)
-    {
-        ExpiresAt = expiresAt;
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void UnDelete()
-    {
-        IsDeleted = false;
-        UpdatedAt = DateTime.UtcNow;
     }
 }
