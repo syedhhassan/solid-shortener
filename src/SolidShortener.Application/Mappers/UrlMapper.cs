@@ -4,7 +4,7 @@ namespace SolidShortener.Application.Mappers;
 
 public class UrlMapper
 {
-    public static UrlDTO ToDTO(Url url)
+    public static UrlDTO ToUrlDTO(Url url)
     {
         return new UrlDTO
         {

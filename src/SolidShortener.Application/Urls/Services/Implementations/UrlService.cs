@@ -20,7 +20,7 @@ public class UrlService : IUrlService
 
     public async Task<UrlDTO> ShortenUrlAsync(ShortenUrlCommand command)
     {
-        var existing = await _urlRepository.GetByUserAndLongUrlAsync(new GetUrlByUserAndLongUrlQuery { UserId = command.UserId, LongUrl = command.LongUrl });
+    var existing = await _urlRepository.GetByUserAndLongUrlAsync(new GetUrlByUserAndLongUrlQuery{UserId = command.UserId, LongUrl = command.LongUrl});
 
         if (existing != null)
         {
@@ -29,39 +29,39 @@ public class UrlService : IUrlService
             existing.SetExpiresAt(command.ExpiresAt);
 
             await _urlRepository.UpdateAsync(existing);
-            return UrlMapper.ToDTO(existing);
+            return UrlMapper.ToUrlDTO(existing);
         }
 
         var url = new Url(command.UserId, command.LongUrl, string.Empty, command.ExpiresAt);
-        await _urlRepository.AddAsync(url);
+        await _urlRepository.AddAsync(url); 
 
         var shortCode = _shortCodeGenerator.Generate(url.Id);
         url.SetShortCode(shortCode);
         await _urlRepository.UpdateAsync(url);
 
-        return UrlMapper.ToDTO(url);
+        return UrlMapper.ToUrlDTO(url);
     }
 
     public async Task<UrlDTO?> GetUrlByShortCodeAsync(GetUrlByShortCodeQuery query)
     {
         var url = await _urlRepository.GetUrlByShortCodeAsync(query);
-
+        
         if (url is null || url.IsDeleted) return null;
-
+        
         if (url.ExpiresAt.HasValue && url.ExpiresAt.Value < DateTime.UtcNow) return null;
 
-        return UrlMapper.ToDTO(url);
+        return UrlMapper.ToUrlDTO(url);
     }
 
-    public async Task<IEnumerable<UrlDTO>> GetUrlsByUserAsync(GetUrlsByUserQuery query)
+    async Task<IEnumerable<UrlDTO>> IUrlService.GetUrlsByUserAsync(GetUrlsByUserQuery query)
     {
         var urls = await _urlRepository.GetUrlsByUserAsync(query);
-        return urls.Where(u => !u.IsDeleted).Select(UrlMapper.ToDTO);
+        return urls.Where(u => !u.IsDeleted).Select(UrlMapper.ToUrlDTO);
     }
 
     public async Task DeleteUrlAsync(DeleteUrlCommand command)
     {
-        var url = await _urlRepository.GetUrlByShortCodeAsync(new GetUrlByShortCodeQuery { ShortCode = command.ShortCode });
+        var url = await _urlRepository.GetUrlByShortCodeAsync(new GetUrlByShortCodeQuery{ShortCode = command.ShortCode});
 
         if (url == null)
             throw new KeyNotFoundException($"URL with short code {command.ShortCode} not found.");
