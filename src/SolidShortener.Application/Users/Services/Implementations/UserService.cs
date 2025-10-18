@@ -29,7 +29,7 @@ public class UserService : IUserService
             _passwordHasher.HashPassword(command.Password)
         );
 
-        await _userRepository.AddUserAsync(user);
+        await _userRepository.AddAsync(user);
 
         return UserMapper.ToDto(user);
     }
