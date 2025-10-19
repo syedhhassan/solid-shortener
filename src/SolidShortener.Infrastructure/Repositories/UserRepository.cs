@@ -18,8 +18,18 @@ public class UserRepository : IUserRepository
     }
 
     public async Task<User?> GetUserByIdAsync(Guid id) =>
-        await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+        await _dbContext.Users
+            .AsNoTracking()
+            .SingleOrDefaultAsync(u =>
+                u.Id == id &&
+                !u.IsDeleted
+            );
 
     public async Task<User?> GetUserByEmailAsync(string email) =>
-        await _dbContext.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+        await _dbContext.Users
+            .AsNoTracking()
+            .SingleOrDefaultAsync(u =>
+                u.Email == email &&
+                !u.IsDeleted
+            );
 }

@@ -18,17 +18,6 @@ public class VisitService : IVisitService
         _urlRepository = urlRepository;
     }
 
-    public async Task<int> GetVisitCountByShortCodeAsync(GetVisitCountByShortCodeQuery query)
-    {
-        return await _visitRepository.GetVisitCountByShortCodeAsync(query);
-    }
-
-    public async Task<IEnumerable<VisitDTO>> GetVisitsByShortCodeAsync(GetVisitsByShortCodeQuery query)
-    {
-        var visits = await _visitRepository.GetVisitsByShortCodeAsync(query);
-        return visits.Select(VisitMapper.ToDTO);
-    }
-
     public async Task LogVisitAsync(LogVisitCommand command)
     {
         var url = await _urlRepository.GetUrlByShortCodeAsync(new GetUrlByShortCodeQuery { ShortCode = command.ShortCode });
@@ -45,4 +34,16 @@ public class VisitService : IVisitService
                         command.UserAgent
                     ));
     }
+
+    public async Task<int> GetVisitCountByShortCodeAsync(GetVisitCountByShortCodeQuery query)
+    {
+        return await _visitRepository.GetVisitCountByShortCodeAsync(query);
+    }
+
+    public async Task<IEnumerable<VisitDTO>> GetVisitsByShortCodeAsync(GetVisitsByShortCodeQuery query)
+    {
+        var visits = await _visitRepository.GetVisitsByShortCodeAsync(query);
+        return visits.Select(VisitMapper.ToDTO);
+    }
+
 }

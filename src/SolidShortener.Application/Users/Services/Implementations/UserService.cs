@@ -11,13 +11,13 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher _passwordHasher;
-    private readonly ITokenService _tokenService;
+    private readonly ITokenGenerator _tokenGenerator;
 
-    public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher, ITokenService tokenService)
+    public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher, ITokenGenerator tokenGenerator)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
-        _tokenService = tokenService;
+        _tokenGenerator = tokenGenerator;
     }
 
     public async Task<UserDTO> RegisterUserAsync(RegisterUserCommand command)
@@ -60,12 +60,12 @@ public class UserService : IUserService
 
         if (!_passwordHasher.VerifyPassword(query.Password, user.PasswordHash)) return null;
 
-        var token = _tokenService.GenerateToken(UserMapper.ToDto(user));
+        var token = _tokenGenerator.GenerateToken(UserMapper.ToDto(user));
 
         return new AuthResultDTO
         {
             Token = token,
-            ExpiresAt = _tokenService.GetTokenExpirationTime(token)
+            ExpiresAt = DateTime.UtcNow.AddMinutes(30)
         };
     }
 }
