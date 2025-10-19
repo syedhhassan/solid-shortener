@@ -46,7 +46,7 @@ public class UrlService : IUrlService
     {
         var url = await _urlRepository.GetUrlByShortCodeAsync(query);
 
-        if (url is null || url.IsDeleted) return null;
+        if (url is null) return null;
 
         if (url.ExpiresAt.HasValue && url.ExpiresAt.Value < DateTime.UtcNow) return null;
 
@@ -68,9 +68,6 @@ public class UrlService : IUrlService
 
         if (url.UserId != command.UserId)
             throw new UnauthorizedAccessException("You do not have permission to delete this URL.");
-
-        if (url.IsDeleted)
-            throw new InvalidOperationException($"URL with short code {command.ShortCode} is already deleted.");
 
         url.MarkAsDeleted();
         await _urlRepository.UpdateAsync(url);

@@ -1,4 +1,3 @@
-using SolidShortener.Application.Urls.DTOs;
 using SolidShortener.Application.Urls.Queries;
 
 namespace SolidShortener.Application.Interfaces.Repositories;
