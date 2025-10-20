@@ -1,5 +1,3 @@
-using System;
-
 namespace SolidShortener.Application.Urls.Commands;
 
 public class ShortenUrlCommand

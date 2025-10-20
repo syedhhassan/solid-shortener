@@ -16,7 +16,7 @@ public static class DependencyInjection
         // Redis Caching
         services.AddStackExchangeRedisCache(options =>
         {
-            options.Configuration = configuration.GetConnectionString("Redis");
+            options.Configuration = configuration.GetConnectionString("CacheConnection");
             options.InstanceName = "SolidShortener_";
         });
 

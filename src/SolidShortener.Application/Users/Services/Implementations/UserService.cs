@@ -65,7 +65,7 @@ public class UserService : IUserService
         return new AuthResultDTO
         {
             Token = token,
-            ExpiresAt = DateTime.UtcNow.AddMinutes(30)
+            ExpiresAt = DateTime.UtcNow.AddMinutes(60)
         };
     }
 }
