@@ -4,7 +4,7 @@ namespace SolidShortener.Domain.Entities.Visits;
 
 public class Visit
 {
-    public long Id { get; private set; }
+    public long Id { get; set; }
     public long UrlId { get; private set; }
     public DateTime VisitedAt { get; private set; } = DateTime.UtcNow;
     public string IpAddress { get; private set; } = string.Empty;

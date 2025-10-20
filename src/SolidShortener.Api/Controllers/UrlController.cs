@@ -2,6 +2,8 @@ using SolidShortener.Api.Services;
 using SolidShortener.Application.Urls.Commands;
 using SolidShortener.Application.Urls.Queries;
 using SolidShortener.Application.Urls.Services.Interfaces;
+using SolidShortener.Application.Visits.Commands;
+using SolidShortener.Application.Visits.Services.Interfaces;
 
 namespace SolidShortener.Api.Controllers;
 
@@ -10,11 +12,13 @@ namespace SolidShortener.Api.Controllers;
 public class UrlController : ControllerBase
 {
     private readonly IUrlService _urlService;
+    private readonly IVisitService _visitService;
     private readonly ICurrentUserService _currentUserService;
 
-    public UrlController(IUrlService urlService, ICurrentUserService currentUserService)
+    public UrlController(IUrlService urlService, IVisitService visitService, ICurrentUserService currentUserService)
     {
         _urlService = urlService;
+        _visitService = visitService;
         _currentUserService = currentUserService;
     }
 
@@ -32,9 +36,19 @@ public class UrlController : ControllerBase
     [HttpGet("{code}")]
     public async Task<IActionResult> GetUrl(string code)
     {
-        var response = await _urlService.GetUrlByShortCodeAsync(new GetUrlByShortCodeQuery { ShortCode = code });
+        var response = await _urlService.GetUrlByShortCodeAsync(
+            new GetUrlByShortCodeQuery { ShortCode = code });
+
         if (response is null) return NotFound();
-        return RedirectPermanent(response.LongUrl);
+
+        await _visitService.LogVisitAsync(new LogVisitCommand
+        {
+            ShortCode = code,
+            IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown",
+            UserAgent = Request.Headers["User-Agent"].ToString()
+        });
+
+        return Redirect(response.LongUrl);
     }
 
     [Authorize]

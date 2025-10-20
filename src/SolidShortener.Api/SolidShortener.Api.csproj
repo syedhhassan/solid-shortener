@@ -21,8 +21,4 @@
     <ProjectReference Include="..\SolidShortener.Infrastructure\SolidShortener.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions/" />
-  </ItemGroup>
-
 </Project>
