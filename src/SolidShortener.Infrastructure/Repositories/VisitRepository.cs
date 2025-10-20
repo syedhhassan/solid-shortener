@@ -21,6 +21,7 @@ public class VisitRepository : IVisitRepository
     public async Task<IEnumerable<Visit>> GetVisitsByShortCodeAsync(GetVisitsByShortCodeQuery query) =>
         await _dbContext.Visits
             .AsNoTracking()
+            .Include(v => v.Url)
             .Where(v =>
                 v.Url != null && v.Url.ShortCode == query.ShortCode &&
                 v.Url.UserId == query.UserId &&

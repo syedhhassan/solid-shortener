@@ -3,7 +3,6 @@ using SolidShortener.Application.Urls.Queries;
 using SolidShortener.Application.Visits.Commands;
 using SolidShortener.Application.Visits.DTOs;
 using SolidShortener.Application.Visits.Queries;
-using SolidShortener.Application.Visits.Services.Interfaces;
 
 namespace SolidShortener.Application.Visits.Services.Implementations;
 
@@ -22,7 +21,7 @@ public class VisitService : IVisitService
     {
         var url = await _urlRepository.GetUrlByShortCodeAsync(new GetUrlByShortCodeQuery { ShortCode = command.ShortCode });
 
-        if (url == null) throw new Exception("Url not found");
+        if (url == null) throw new KeyNotFoundException("Url not found");
 
         url.IncrementVisitsCount();
         await _urlRepository.UpdateAsync(url);
@@ -45,5 +44,4 @@ public class VisitService : IVisitService
         var visits = await _visitRepository.GetVisitsByShortCodeAsync(query);
         return visits.Select(VisitMapper.ToDTO);
     }
-
 }
