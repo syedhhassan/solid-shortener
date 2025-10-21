@@ -41,7 +41,7 @@ public class UrlController : ControllerBase
 
         if (response is null) return NotFound();
 
-        await _visitService.LogVisitAsync(new LogVisitCommand
+        _ = _visitService.LogVisitAsync(new LogVisitCommand
         {
             ShortCode = code,
             IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown",
