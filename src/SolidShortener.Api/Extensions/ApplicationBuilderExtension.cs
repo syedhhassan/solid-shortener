@@ -1,3 +1,4 @@
+using Prometheus;
 using SolidShortener.Api.Middlewares;
 
 namespace SolidShortener.Api.Extensions;
@@ -16,9 +17,16 @@ public static class ApplicationBuilderExtensions
         }
 
         app.UseHttpsRedirection();
+
+        app.UseRouting();
+
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseHttpMetrics();
+
         app.MapControllers();
+        app.MapMetrics();
 
         return app;
     }
