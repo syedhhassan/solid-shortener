@@ -178,6 +178,25 @@ services.Decorate<IUrlRepository, CachedUrlRepository>();
 
 ---
 
+## 🧩 Observability (Prometheus + Grafana Integration)
+
+This project includes real-time performance and request metrics powered by **Prometheus** and visualized in **Grafana**.
+
+Key metrics tracked:
+- HTTP request duration and status codes
+- Endpoint-level throughput
+- Application latency and performance trends
+
+#### 📊 Example Dashboard
+
+<p align="center">
+  <img src="docs/screenshots/prometheus-targets.png" width="48%" />
+  <img src="docs/screenshots/grafana-dashboard.png" width="48%" />
+</p>
+
+---
+
+
 ## 🧠 Key Takeaway
 
 `SolidShortener` isn’t just a URL shortener — it’s a blueprint for building **maintainable, scalable, and enterprise-grade APIs** using .NET 8, Clean Architecture, and CQRS.
